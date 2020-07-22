@@ -15,7 +15,9 @@ public class School {
 
     private String name;
 
-    private String location;
+    private String address;
+
+    private String type;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)

@@ -15,7 +15,7 @@ public class Workplace {
 
     private String name;
 
-    private String location;
+    private String address;
 
     private String type;
 

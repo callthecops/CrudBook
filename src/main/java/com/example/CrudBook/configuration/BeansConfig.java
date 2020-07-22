@@ -5,6 +5,7 @@ import com.example.CrudBook.model.Institution.School;
 import com.example.CrudBook.model.Institution.Workplace;
 import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
+import com.example.CrudBook.model.User.UserForm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -38,4 +39,10 @@ public class BeansConfig {
     public Student student() {
         return new Student();
     }
+
+    @Bean
+    public UserForm userForm() {
+        return new UserForm();
+    }
+
 }
