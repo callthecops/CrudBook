@@ -1,11 +1,11 @@
 package com.example.CrudBook.model.User;
 
-import com.example.CrudBook.model.Institution.Institution;
+import com.example.CrudBook.model.Institution.School;
 
 import javax.persistence.*;
 
 @Entity
-public class Student implements User {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,8 @@ public class Student implements User {
     private byte[] image;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_institution")
-    private Institution institution;
+    @JoinColumn(name = "fk_school")
+    private School school;
 
     private String description;
 

@@ -1,9 +1,7 @@
 package com.example.CrudBook.AOPlogging;
 
-import com.example.CrudBook.model.Institution.Institution;
 import com.example.CrudBook.model.Institution.School;
 import com.example.CrudBook.model.User.Employee;
-import com.example.CrudBook.model.User.User;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,15 +16,15 @@ public class Logging {
     public void perfromance() {
     }
 
-    @Around("perfromance")
-    public User saveUserToFile() {
-        return new Employee();
-    }
-
-    @AfterReturning("performance")
-    public Institution saveInstitutionToFile() {
-        return new School();
-    }
+//    @Around("perfromance")
+//    public User saveUserToFile() {
+//        return new Employee();
+//    }
+//
+//    @AfterReturning("performance")
+//    public Institution saveInstitutionToFile() {
+//        return new School();
+//    }
 
 
 }

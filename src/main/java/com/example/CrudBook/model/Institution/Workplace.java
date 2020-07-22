@@ -1,13 +1,14 @@
 package com.example.CrudBook.model.Institution;
 
-import com.example.CrudBook.model.User.User;
+import com.example.CrudBook.model.User.Employee;
+import com.example.CrudBook.model.User.Student;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Workplace implements Institution {
+public class Workplace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +24,7 @@ public class Workplace implements Institution {
     @Column(name = "work_image")
     private byte[] image;
 
-    @OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "workplace", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Employee> employees = new ArrayList<>();
 
 }
