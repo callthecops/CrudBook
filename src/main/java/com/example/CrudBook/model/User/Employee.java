@@ -5,7 +5,7 @@ import com.example.CrudBook.model.Institution.Workplace;
 import javax.persistence.*;
 
 @Entity
-public class Employee {
+public class Employee implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

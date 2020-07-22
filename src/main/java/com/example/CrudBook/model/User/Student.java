@@ -5,7 +5,7 @@ import com.example.CrudBook.model.Institution.School;
 import javax.persistence.*;
 
 @Entity
-public class Student {
+public class Student implements User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,6 @@ public class Student {
     private String firstName;
 
     private String lastName;
-
 
     private int age;
 
