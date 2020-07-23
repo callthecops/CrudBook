@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -39,6 +40,10 @@ public class UserController {
 
         List<Student> studentList = studentRepository.findAll();
         List<Employee> employeeList = employeeRepository.findAll();
+
+        for(Student student :studentList){
+            student.setBase64(Base64.getEncoder().encodeToString(student.getImage()));
+        }
 
         model.addAttribute("studentlist", studentList);
         model.addAttribute("employeelist", employeeList);

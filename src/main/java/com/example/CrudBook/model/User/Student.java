@@ -30,6 +30,8 @@ public class Student implements User{
 
     private String description;
 
+    private String base64;
+
     public Student(Long id, String firstName, String lastName, int age, String specialisation, byte[] image, School school, String description) {
         this.id = id;
         this.firstName = firstName;
@@ -108,4 +110,11 @@ public class Student implements User{
         this.description = description;
     }
 
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
 }
