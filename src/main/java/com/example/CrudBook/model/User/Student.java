@@ -24,7 +24,7 @@ public class Student implements User{
     @Column(name = "employee_image")
     private byte[] image;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_school")
     private School school;
 
