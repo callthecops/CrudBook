@@ -25,16 +25,55 @@
 
     <!-- Main CSS-->
     <link th:href="@{/css/main.css}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    .redcolor{
+        background-color: rgba(244,67,54);
+    }
+
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+
+    </style>
 </head>
 
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
+           href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i
+                class="fa fa-bars"></i></a>
+
+        <a th:href="@{'/home'}" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+        <a th:href="@{'/users'}" class="w3-bar-item w3-button w3-padding-large w3-white">Users</a>
+        <a th:href="@{'/institutions'}" class="w3-bar-item w3-button w3-padding-large w3-white">Institutions</a>
+
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a th:href="@{'/home'}" class="w3-bar-item w3-button w3-padding-large">Home</a>
+        <a th:href="@{'/users'}" class="w3-bar-item w3-button w3-padding-large">Users</a>
+        <a th:href="@{'/institutions'}" class="w3-bar-item w3-button w3-padding-large">Institutions</a>
+
+    </div>
+</div>
+
+
 <body>
-<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+<div class="page-wrapper redcolor p-t-100 p-b-100 font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Add a new User</h2>
-                <form method="POST" enctype="multipart/form-data" >
+                <form method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="First Name" name="firstName">
                     </div>
@@ -108,6 +147,23 @@
 
 <!-- Main JS-->
 <script src="js/global.js"></script>
+
+<script>
+    <script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+
+
+</script>
+
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 

@@ -102,12 +102,33 @@ button.primary.ghost {
 	padding: 7px;
 }
 
+#addbutton {
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+border: solid 1px #20538D;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+background: #4479BA;
+color: #FFF;
+padding: 8px 12px;
+text-decoration: none;
+}
+
+
+#cardContainer1 {
+display:grid;
+grid-template-columns: repeat(3, 1fr);
+grid-gap:70px;
+}
+
+
     </style>
 </head>
 <body>
-<br><br>
-<br><br>
-<br><br>
+
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -130,43 +151,61 @@ button.primary.ghost {
 
     </div>
 </div>
+<br><br>
+<br><br>
+<a id="addbutton" th:href="@{users/addUser}">Add User</a>
+<br><br>
+
+<div id="studentContainer">
 
 
+    <div id="studentContainerInner">
+        <div th:if="${#lists.isEmpty(studentlist)}">
+            <h1>There are no Students in the database, please add some</h1>
+        </div>
+        <div th:unless="${#lists.isEmpty(studentlist)}">
+            <h1>Students</h1>
+            <div id="cardContainer1">
+                <div id="studentCardElement" th:each="student: ${studentlist}">
+                    <!-- CARD STARTS HERE -->
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user"/>
+                        <h3>Ricky Park</h3>
+                        <h6>New York</h6>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <div class="buttons">
+                            <button class="primary">
+                                Update
+                            </button>
+                            <button class="primary ghost">
+                                Delete
+                            </button>
+                        </div>
+                        <div class="skills">
+                            <h6>Skills</h6>
+                            <ul>
+                                <li>UI / UX</li>
+                                <li>Front End Development</li>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>React</li>
+                                <li>Node</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- CARD ENDS HERE -->
+                </div>
 
+            </div>
+        </div>
 
-<div class="card-container">
-
-    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-    <h3>Ricky Park</h3>
-    <h6>New York</h6>
-    <p>User interface designer and <br/> front-end developer</p>
-    <div class="buttons">
-        <button class="primary">
-            Message
-        </button>
-        <button class="primary ghost">
-            Following
-        </button>
     </div>
-    <div class="skills">
-        <h6>Skills</h6>
-        <ul>
-            <li>UI / UX</li>
-            <li>Front End Development</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node</li>
-        </ul>
-    </div>
+
 </div>
-
-
-
-
-
-<a th:href="@{users/addUser}">Add User</a>
+<!-- STUDENT CONTAINERINNER ENDS HERE -->
+</div>
+<!-- STUDENT CONTAINER ENDS HERE -->
 
 <script>
     // Used to toggle the menu on small screens when clicking on the menu button
@@ -178,6 +217,14 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
+
+
+
+
+
+
 
 
 </script>

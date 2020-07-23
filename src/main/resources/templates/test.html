@@ -12,3 +12,44 @@ color: #FFF;
 padding: 8px 12px;
 text-decoration: none;
 }
+
+
+//test
+
+byte[] image = student.getImage();
+String base64 = Base64.getEncoder().encodeToString(image);
+
+model.addAttribute("student",student);
+model.addAttribute("image",base64);
+return "success";
+
+
+
+<!-- CART CONTAINER STARTS HERE -->
+<div class="card-container">
+    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user"/>
+    <h3>Ricky Park</h3>
+    <h6>New York</h6>
+    <p>User interface designer and <br/> front-end developer</p>
+    <div class="buttons">
+        <button class="primary">
+            Update
+        </button>
+        <button class="primary ghost">
+            Delete
+        </button>
+    </div>
+    <div class="skills">
+        <h6>Skills</h6>
+        <ul>
+            <li>UI / UX</li>
+            <li>Front End Development</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+            <li>Node</li>
+        </ul>
+    </div>
+</div>
+<!-- CART CONTAINER ENDS HERE -->
