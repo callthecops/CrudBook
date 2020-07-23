@@ -124,37 +124,8 @@ grid-template-columns: repeat(3, 1fr);
 grid-gap:70px;
 }
 
-.buttons{
-display:grid;
-grid-template-columns: repeat(2, 1fr);
-grid-gap:1px;
-}
 
-.myButton {
-	box-shadow:inset 0px 39px 0px -24px #e67a73;
-	background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
-	background-color:#e4685d;
-	border-radius:4px;
-	border:1px solid #ffffff;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:18px;
-	padding:7px 25px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #b23e35;
-	width:120px;
 
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #eb675e 5%, #e4685d 100%);
-	background-color:#eb675e;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
 
 
 
@@ -207,12 +178,14 @@ grid-gap:1px;
                         <h6 th:text="${student.specialisation + ',' + student.age}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
                         <div class="buttons">
-                            <form method="POST" th:action="@{'/student/updateStudent/' + ${student.id}}">
-                                <input type="submit" value="Update" class="myButton">
+                            <form method="POST" th:action="@{'/posts/' + ${student.id}}">
+                                <button class="primary">
+                                    Update
+                                </button>
                             </form>
-                            <form method="POST" th:action="@{'/delete/' + ${student.id}}">
-                                <input type="submit" value="Delete" class="myButton">
-                            </form>
+                            <button class="primary ghost">
+                                Delete
+                            </button>
                         </div>
                         <div class="skills">
                             <h6>Description</h6>
@@ -249,6 +222,18 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

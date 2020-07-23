@@ -6,6 +6,7 @@ import com.example.CrudBook.model.User.User;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.EmployeeRepository;
 import com.example.CrudBook.repository.StudentRepository;
+import com.example.CrudBook.service.StudentService;
 import com.example.CrudBook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    StudentService studentService;
+
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -41,9 +45,7 @@ public class UserController {
         List<Student> studentList = studentRepository.findAll();
         List<Employee> employeeList = employeeRepository.findAll();
 
-        for(Student student :studentList){
-            student.setBase64(Base64.getEncoder().encodeToString(student.getImage()));
-        }
+        studentService.transformToBase64(studentList);
 
         model.addAttribute("studentlist", studentList);
         model.addAttribute("employeelist", employeeList);

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -35,7 +37,12 @@ public class StudentController {
         return "adduserform";
     }
 
-
+    @PostMapping("/updateStudent/{id}")
+    public String updateStudent(@PathVariable long id, Model model) {
+        Student student = studentRepository.findById(id);
+        model.addAttribute("student", student);
+        return "updateuserform";
+    }
 
 //
 //    @PostMapping("/updateUser")
