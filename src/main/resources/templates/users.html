@@ -158,6 +158,8 @@ grid-gap:1px;
 
 
 
+
+
     </style>
 </head>
 <body>
@@ -207,10 +209,10 @@ grid-gap:1px;
                         <h6 th:text="${student.specialisation + ',' + student.age}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
                         <div class="buttons">
-                            <form method="POST" th:action="@{'/student/updateStudent/' + ${student.id}}">
+                            <form method="GET" th:action="@{'/student/edit/' + ${student.id}}">
                                 <input type="submit" value="Update" class="myButton">
                             </form>
-                            <form method="POST" th:action="@{'/delete/' + ${student.id}}">
+                            <form method="GET" th:action="@{'/student/delete/' + ${student.id}}">
                                 <input type="submit" value="Delete" class="myButton">
                             </form>
                         </div>
@@ -249,6 +251,8 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
 
 
 </script>
