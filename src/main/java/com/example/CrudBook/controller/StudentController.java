@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
+@Validated
 @RequestMapping("/student")
 public class StudentController {
 
@@ -48,14 +50,16 @@ public class StudentController {
 
 
     @PostMapping("/updatestudent/{id}")
-    public String updateTheStudent(@RequestPart("image") byte[] image, @Valid UserForm userForm, Errors errors, @PathVariable("id") long id){
-       if(errors.hasErrors()){
-           return "test";
-       }
+    public String updateTheStudent(@RequestPart("image") byte[] image, @Valid UserForm userForm, Errors errors, @PathVariable("id") long id) {
 
-
+        if (errors.hasErrors()) {
+            return "redirect:/student/editstudent/" + id;
+        }
         Student student = studentRepository.findById(id);
-        return "/home";
+        studentRepository.save(studentService.updateStudent(student,userForm,image));
+
+
+        return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")

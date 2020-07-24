@@ -74,7 +74,7 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Update Student</h2>
-                <form method="POST" enctype="multipart/form-data" th:action="@{'/student/updatestudent/' + ${student.id}}">
+                <form method="POST" enctype="multipart/form-data" th:object="${userform}" th:action="@{'/student/updatestudent/' + ${student.id}}">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="First Name" name="firstName"
                                th:value="${student.firstName}">

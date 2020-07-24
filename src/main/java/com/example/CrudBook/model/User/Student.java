@@ -3,6 +3,7 @@ package com.example.CrudBook.model.User;
 import com.example.CrudBook.model.Institution.School;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Student implements User{
@@ -10,13 +11,13 @@ public class Student implements User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank
     private String firstName;
-
+    @NotBlank
     private String lastName;
-
+    @NotBlank
     private int age;
-
+    @NotBlank
     private String specialisation;
 
     @Lob

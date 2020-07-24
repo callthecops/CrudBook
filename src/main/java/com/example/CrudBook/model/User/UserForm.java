@@ -3,15 +3,18 @@ package com.example.CrudBook.model.User;
 import com.example.CrudBook.model.Institution.School;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserForm {
 
     @NotNull
+    @NotBlank
     @Size(min = 3, max = 16)
     private String firstName;
     @NotNull
+    @NotBlank
     @Size(min = 3, max = 16)
     private String lastName;
 
