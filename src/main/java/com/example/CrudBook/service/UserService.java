@@ -20,7 +20,7 @@ public class UserService {
             student.setLastName(userForm.getLastName());
             student.setDescription(userForm.getDescription());
             student.setImage(image);
-            student.setSchool(new School());
+            //student.setSchool(new School());
             return student;
         } else {
             Employee employee = new Employee();
@@ -30,7 +30,7 @@ public class UserService {
             employee.setLastName(userForm.getLastName());
             employee.setDescription(userForm.getDescription());
             employee.setImage(image);
-            employee.setWorkplace(new Workplace());
+           // employee.setWorkplace(new Workplace());
             return employee;
         }
     }

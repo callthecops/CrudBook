@@ -209,7 +209,7 @@ grid-gap:1px;
                     <div class="card-container">
                         <img class="round" th:src="@{'data:image/jpeg;base64,'+${school.base64}}" alt="institution"/>
                         <h3 th:text="${school.name}"></h3>
-                        <h6 th:text="${student.address}">New York</h6>
+                        <h6 th:text="${school.address}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
                         <div class="buttons">
                             <form method="GET" th:action="@{'/school/editschool/'+${school.id}}">
