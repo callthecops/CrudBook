@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Add User</title>
+    <title>Update Student</title>
 
     <!-- Icons font CSS-->
     <link th:href="@{/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet">
@@ -39,16 +39,6 @@
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
-
-
-
-
-
-
-
-
-
-
 
 
     </style>
@@ -83,8 +73,8 @@
         <div class="card card-1">
             <div class="card-heading"></div>
             <div class="card-body">
-                <h2 class="title">Update User</h2>
-                <form method="POST" enctype="multipart/form-data">
+                <h2 class="title">Update Student</h2>
+                <form method="POST" enctype="multipart/form-data" th:action="@{'/student/updatestudent/' + ${student.id}}">
                     <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="First Name" name="firstName"
                                th:value="${student.firstName}">
@@ -113,9 +103,7 @@
                             <div class="input-group">
                                 <div class="rs-select2 js-select-simple select--no-search">
                                     <select name="institution">
-                                        <option disabled="disabled" selected="selected">Select Institution</option>
                                         <option value="school">School</option>
-                                        <option value="workplace">Workplace</option>
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -163,7 +151,7 @@
 <script src="js/global.js"></script>
 
 <script>
-    <script>
+
 // Used to toggle the menu on small screens when clicking on the menu button
 function myFunction() {
   var x = document.getElementById("navDemo");
@@ -173,19 +161,6 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 

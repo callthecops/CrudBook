@@ -6,6 +6,7 @@ import com.example.CrudBook.model.User.User;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.EmployeeRepository;
 import com.example.CrudBook.repository.StudentRepository;
+import com.example.CrudBook.service.EmployeeService;
 import com.example.CrudBook.service.StudentService;
 import com.example.CrudBook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -32,7 +30,8 @@ public class UserController {
     UserService userService;
     @Autowired
     StudentService studentService;
-
+    @Autowired
+    EmployeeService employeeService;
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -46,6 +45,7 @@ public class UserController {
         List<Employee> employeeList = employeeRepository.findAll();
 
         studentService.transformToBase64(studentList);
+        employeeService.transformToBase64(employeeList);
 
         model.addAttribute("studentlist", studentList);
         model.addAttribute("employeelist", employeeList);
@@ -78,7 +78,7 @@ public class UserController {
             return "redirect:/student/saveStudent";
         } else {
             model.addFlashAttribute("employee", user);
-            return "redirect:/institution/saveInstitution";
+            return "redirect:/employee/saveEmployee";
 
         }
     }

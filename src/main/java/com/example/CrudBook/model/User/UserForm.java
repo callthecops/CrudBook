@@ -9,19 +9,19 @@ import javax.validation.constraints.Size;
 public class UserForm {
 
     @NotNull
-    @Size(min = 5, max = 16)
+    @Size(min = 3, max = 16)
     private String firstName;
     @NotNull
-    @Size(min = 5, max = 16)
+    @Size(min = 3, max = 16)
     private String lastName;
 
     private int age;
     @NotNull
-    @Size(min=5,max=16)
+    @Size(min=2,max=16)
     private String specialisation;
 
     @NotNull
-    @Size(min=5,max=25)
+    @Size(min=2,max=25)
     private String institution;
     @NotNull
     @Size(min=5,max=125)

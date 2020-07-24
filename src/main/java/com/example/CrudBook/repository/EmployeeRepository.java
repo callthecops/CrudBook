@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     List<Employee> findAll();
+
+    Employee findById(long id);
 }

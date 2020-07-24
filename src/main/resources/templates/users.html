@@ -124,6 +124,12 @@ grid-template-columns: repeat(3, 1fr);
 grid-gap:70px;
 }
 
+#cardContainer2 {
+display:grid;
+grid-template-columns: repeat(3, 1fr);
+grid-gap:70px;
+}
+
 .buttons{
 display:grid;
 grid-template-columns: repeat(2, 1fr);
@@ -155,8 +161,6 @@ grid-gap:1px;
 	position:relative;
 	top:1px;
 }
-
-
 
 
 
@@ -192,14 +196,13 @@ grid-gap:1px;
 <br><br>
 
 <div id="studentContainer">
-
-
     <div id="studentContainerInner">
         <div th:if="${#lists.isEmpty(studentlist)}">
             <h1>There are no Students in the database, please add some</h1>
         </div>
         <div th:unless="${#lists.isEmpty(studentlist)}">
             <h1>Students</h1>
+            <br>
             <div id="cardContainer1">
                 <div id="studentCardElement" th:each="student: ${studentlist}">
                     <!-- CARD STARTS HERE -->
@@ -209,7 +212,7 @@ grid-gap:1px;
                         <h6 th:text="${student.specialisation + ',' + student.age}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
                         <div class="buttons">
-                            <form method="GET" th:action="@{'/student/edit/' + ${student.id}}">
+                            <form method="GET" th:action="@{'/student/editstudent/'+${student.id}}">
                                 <input type="submit" value="Update" class="myButton">
                             </form>
                             <form method="GET" th:action="@{'/student/delete/' + ${student.id}}">
@@ -238,8 +241,50 @@ grid-gap:1px;
 
 <br><br><br><br>
 
-<h1>Employees</h1>
+<br><br>
+<div id="employeeContainer">
+    <div id="employeeContainerInner">
+        <div th:if="${#lists.isEmpty(employeelist)}">
+            <h1>There are no Students in the database, please add some</h1>
+        </div>
+        <div th:unless="${#lists.isEmpty(employeelist)}">
+            <h1>Employees</h1>
+            <br>
+            <div id="cardContainer2">
+                <div id="employeeCardElement" th:each="employee: ${employeelist}">
+                    <!-- CARD STARTS HERE -->
+                    <div class="card-container">
+                        <img class="round" th:src="@{'data:image/jpeg;base64,'+${employee.base64}}" alt="user"/>
+                        <h3 th:text="${employee.firstName + ' ' + employee.lastName}"></h3>
+                        <h6 th:text="${employee.specialisation + ',' + employee.age}">New York</h6>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <div class="buttons">
+                            <form method="GET" th:action="@{'/employee/editemployee/'+${employee.id}}">
+                                <input type="submit" value="Update" class="myButton">
+                            </form>
+                            <form method="GET" th:action="@{'/employee/delete/' + ${employee.id}}">
+                                <input type="submit" value="Delete" class="myButton">
+                            </form>
+                        </div>
+                        <div class="skills">
+                            <h6>Description</h6>
+                            <ul>
+                                <li th:text="${employee.description}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- CARD ENDS HERE -->
+                </div>
 
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- EMPLOYEE CONTAINERINNER ENDS HERE -->
+</div>
+<!-- EMPLOYEE CONTAINER ENDS HERE -->
 
 <script>
     // Used to toggle the menu on small screens when clicking on the menu button
@@ -251,6 +296,8 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
 
 
 

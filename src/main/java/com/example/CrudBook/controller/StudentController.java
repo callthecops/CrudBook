@@ -1,17 +1,20 @@
 package com.example.CrudBook.controller;
 
+import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
+import com.example.CrudBook.model.User.User;
+import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.StudentRepository;
 import com.example.CrudBook.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -36,11 +39,23 @@ public class StudentController {
         return "adduserform";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/editstudent/{id}")
     public String showUpdateForm(@PathVariable long id, Model model) {
         Student student = studentRepository.findById(id);
         model.addAttribute("student", student);
-        return "updateuserform";
+        return "updatestudentform";
+    }
+
+
+    @PostMapping("/updatestudent/{id}")
+    public String updateTheStudent(@RequestPart("image") byte[] image, @Valid UserForm userForm, Errors errors, @PathVariable("id") long id){
+       if(errors.hasErrors()){
+           return "test";
+       }
+
+
+        Student student = studentRepository.findById(id);
+        return "/home";
     }
 
     @GetMapping("/delete/{id}")

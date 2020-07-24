@@ -16,6 +16,8 @@ public class Employee implements User {
 
     private int age;
 
+    private String base64;
+
     private String specialisation;
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -23,7 +25,7 @@ public class Employee implements User {
     private byte[] image;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_workplace")
     private Workplace workplace;
 
@@ -107,5 +109,11 @@ public class Employee implements User {
         this.description = description;
     }
 
+    public String getBase64() {
+        return base64;
+    }
 
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
 }
