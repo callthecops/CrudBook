@@ -8,7 +8,9 @@ import java.util.List;
 
 
 @Repository
-public interface SchoolRepository extends CrudRepository <School,Long> {
+public interface SchoolRepository extends CrudRepository<School, Long> {
     List<School> findAll();
+
+    School findById(long id);
 }
 

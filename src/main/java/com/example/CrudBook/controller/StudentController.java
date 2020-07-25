@@ -70,20 +70,4 @@ public class StudentController {
 
         return "redirect:/users";
     }
-//
-//    @PostMapping("/updateUser")
-//    public void updateUser() {
-//    }
-//
-//    @GetMapping("/deleteUser")
-//    public void deleteUser() {
-//    }
-//
-//    @GetMapping("/findUser")
-//    public void retrieveUser() {
-//    }
-//
-//    @GetMapping("/findUsers")
-//    public void retrieveUsers() {
-//    }
 }

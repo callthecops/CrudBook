@@ -164,6 +164,8 @@ grid-gap:1px;
 
 
 
+
+
     </style>
 </head>
 <body>
@@ -248,7 +250,7 @@ grid-gap:1px;
             <h1>There are no Workplaces in the database, please add some</h1>
         </div>
         <div th:unless="${#lists.isEmpty(workplacelist)}">
-            <h1>Employees</h1>
+            <h1>Workplace</h1>
             <br>
             <div id="cardContainer2">
                 <div id="workplaceCardElement" th:each="workplace: ${workplacelist}">
@@ -296,6 +298,8 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
 
 </script>
 
