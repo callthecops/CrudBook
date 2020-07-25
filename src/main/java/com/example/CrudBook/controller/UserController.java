@@ -1,14 +1,16 @@
 package com.example.CrudBook.controller;
 
+import com.example.CrudBook.model.Institution.School;
+import com.example.CrudBook.model.Institution.Workplace;
 import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
 import com.example.CrudBook.model.User.User;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.EmployeeRepository;
+import com.example.CrudBook.repository.SchoolRepository;
 import com.example.CrudBook.repository.StudentRepository;
-import com.example.CrudBook.service.EmployeeService;
-import com.example.CrudBook.service.StudentService;
-import com.example.CrudBook.service.UserService;
+import com.example.CrudBook.repository.WorkplaceRepository;
+import com.example.CrudBook.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +34,20 @@ public class UserController {
     StudentService studentService;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    SchoolService schoolService;
+    @Autowired
+    WorkplaceService workplaceService;
 
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    SchoolRepository schoolRepository;
+    @Autowired
+    WorkplaceRepository workplaceRepository;
+
 
     @GetMapping
     public String getAllUsers(Model model) {
@@ -46,6 +57,15 @@ public class UserController {
 
         studentService.transformToBase64(studentList);
         employeeService.transformToBase64(employeeList);
+
+        List<School> schoolList = schoolRepository.findAll();
+        List<Workplace> workplaceList = workplaceRepository.findAll();
+        if (!schoolList.isEmpty()) {
+            model.addAttribute("schoollist",schoolList);
+        }
+        if (!workplaceList.isEmpty()) {
+            model.addAttribute("workplacelist",workplaceList);
+        }
 
         model.addAttribute("studentlist", studentList);
         model.addAttribute("employeelist", employeeList);

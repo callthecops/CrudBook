@@ -1,9 +1,11 @@
 package com.example.CrudBook.controller;
 
+import com.example.CrudBook.model.Institution.School;
 import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
 import com.example.CrudBook.model.User.User;
 import com.example.CrudBook.model.User.UserForm;
+import com.example.CrudBook.repository.SchoolRepository;
 import com.example.CrudBook.repository.StudentRepository;
 import com.example.CrudBook.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class StudentController {
     StudentService studentService;
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    SchoolRepository schoolRepository;
 
     //Implementing a redirect means having a 2 handler methods first with Post and second with Get.
     @GetMapping("/saveStudent")
@@ -56,7 +60,7 @@ public class StudentController {
             return "redirect:/student/editstudent/" + id;
         }
         Student student = studentRepository.findById(id);
-        studentRepository.save(studentService.updateStudent(student,userForm,image));
+        studentRepository.save(studentService.updateStudent(student, userForm, image));
 
 
         return "redirect:/users";
@@ -70,4 +74,15 @@ public class StudentController {
 
         return "redirect:/users";
     }
+
+
+    @GetMapping("/addschool/{schoolid}/{studentid}")
+    public String addSchoolToStudent(@PathVariable("schoolid") long id, @PathVariable("studentid") long id2, Model model) {
+        School school = schoolRepository.findById(id);
+        Student student = studentRepository.findById(id2);
+        student.setSchool(school);
+        studentRepository.save(student);
+        return "redirect:/users";
+    }
+
 }

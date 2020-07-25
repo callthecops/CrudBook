@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link th:href="@{/css/dropdown.css}" rel="stylesheet">
     <style>
 
 
@@ -162,6 +162,79 @@ grid-gap:1px;
 	top:1px;
 }
 
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+#parentdropdown{overflow-y:scroll;
+ display:flex;
+  width:100%;
+  justify-content:center;
+}
+
+#dropdown-container{
+    float: left
+    font-family: Palatino Linotype;
+    position:absolute;
+}
+#dropdown{
+    padding:5px;
+    cursor:pointer;
+    font-size: 15px;
+    border: 1px solid rgb(169, 169, 169);
+    -moz-appearance: none;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #2961c1 inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px purple inset;
+    width:300px;
+    margin:0px 0px 0px 15px;
+
+}
+.down-arrow-icon{
+    padding-left: 5px;
+    /*place img of down arrow here*/
+}
+#dropdown-list{
+    display:none;
+    width: 100%;
+    padding:0px;
+    margin:0px 0px 0px 7px;
+    border: 1px solid rgb(169,169,169);
+}
+#dropdown-container:hover ul#dropdown-list{
+    display:block;
+    background-color:white;
+}
+#dropdown-container ul{
+    padding:0px;
+    list-style: none;
+}
+#dropdown-container ul li{
+    width:100%;
+
+}
+#dropdown-container ul li:hover{
+    background-color: lightblue;
+    cursor:pointer;
+
+}
+#dropdown-container ul li a{
+    padding-left: 10px;
+    text-decoration:none;
+    color: black;
+}
+
+
+
+
+
+
 
 
     </style>
@@ -207,10 +280,39 @@ grid-gap:1px;
                 <div id="studentCardElement" th:each="student: ${studentlist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" th:src="@{'data:image/jpeg;base64,'+${student.base64}}" alt="user"/>
+                        <img class="round" style="width:100%;max-width:300px;"
+                             th:src="@{'data:image/jpeg;base64,'+${student.base64}}" alt="user"/>
                         <h3 th:text="${student.firstName + ' ' + student.lastName}"></h3>
                         <h6 th:text="${student.specialisation + ',' + student.age}">New York</h6>
-                        <p>User interface designer and <br/> front-end developer</p>
+                        <!-- adding schools here -->
+                        <div th:if="${#lists.isEmpty(schoollist)}">
+                            <h3>There are no schools in the database please add one !</h3>
+                        </div>
+                        <div th:unless="${#lists.isEmpty(schoollist)}">
+                            <div class="col-lg-3" th:object="${school}">
+
+                                <!-- adding the dropdown here -->
+                                <div th:if="${student.school == null}">
+                                    <div id="parentdropdown">
+                                        <div id="dropdown-container">
+                                            <div id="dropdown">Select School<span class="down-arrow-icon"></span></div>
+                                            <ul id="dropdown-list" th:each="school : ${schoollist}">
+                                                <li><a th:href="@{'/student/addschool/'+${school.id}+'/'+${student.id}}"
+                                                       th:text="${school.address}+' : '+${school.name}">one</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${student.school != null}">
+                                    <div th:text="${student.school.name}">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+
+                        <!-- adding school end here -->
+
                         <div class="buttons">
                             <form method="GET" th:action="@{'/student/editstudent/'+${student.id}}">
                                 <input type="submit" value="Update" class="myButton">
@@ -254,10 +356,15 @@ grid-gap:1px;
                 <div id="employeeCardElement" th:each="employee: ${employeelist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" th:src="@{'data:image/jpeg;base64,'+${employee.base64}}" alt="user"/>
+                        <img class="round" style="width:100%;max-width:300px;"
+                             th:src="@{'data:image/jpeg;base64,'+${employee.base64}}" alt="user"/>
                         <h3 th:text="${employee.firstName + ' ' + employee.lastName}"></h3>
                         <h6 th:text="${employee.specialisation + ',' + employee.age}">New York</h6>
-                        <p>User interface designer and <br/> front-end developer</p>
+                        <!-- adding schools here -->
+                        <div th:if="${#employee.workplace==null}">
+                            <h1>HI</h1>
+                        </div>
+                        <!-- adding school end here -->
                         <div class="buttons">
                             <form method="GET" th:action="@{'/employee/editemployee/'+${employee.id}}">
                                 <input type="submit" value="Update" class="myButton">
@@ -296,6 +403,11 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+
+
+
+
 
 
 
