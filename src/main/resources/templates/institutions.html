@@ -209,7 +209,7 @@ grid-gap:1px;
                 <div id="schoolCardElement" th:each="school: ${schoollist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" th:src="@{'data:image/jpeg;base64,'+${school.base64}}" alt="institution"/>
+                        <img class="round" style="width:100%;max-width:300px;" th:src="@{'data:image/jpeg;base64,'+${school.base64}}" alt="institution"/>
                         <h3 th:text="${school.name}"></h3>
                         <h6 th:text="${school.address}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
@@ -256,12 +256,12 @@ grid-gap:1px;
                 <div id="workplaceCardElement" th:each="workplace: ${workplacelist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" th:src="@{'data:image/jpeg;base64,'+${workplace.base64}}" alt="institution"/>
+                        <img class="round" style="width:100%;max-width:200px;" th:src="@{'data:image/jpeg;base64,'+${workplace.base64}}" alt="institution"/>
                         <h3 th:text="${workplace.name}"></h3>
                         <h6 th:text="${workplace.address}">New York</h6>
                         <p>User interface designer and <br/> front-end developer</p>
                         <div class="buttons">
-                            <form method="GET" th:action="@{'/school/editworkplace/'+${workplace.id}}">
+                            <form method="GET" th:action="@{'/workplace/editworkplace/'+${workplace.id}}">
                                 <input type="submit" value="Update" class="myButton">
                             </form>
                             <form method="GET" th:action="@{'/workplace/delete/' + ${workplace.id}}">

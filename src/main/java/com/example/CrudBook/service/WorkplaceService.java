@@ -1,5 +1,7 @@
 package com.example.CrudBook.service;
 
+import com.example.CrudBook.model.Institution.InstitutionForm;
+import com.example.CrudBook.model.Institution.School;
 import com.example.CrudBook.model.Institution.Workplace;
 import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.repository.WorkplaceRepository;
@@ -23,5 +25,14 @@ public class WorkplaceService {
         for(Workplace workplace : workplaceList){
             workplace.setBase64(Base64.getEncoder().encodeToString(workplace.getImage()));
         }
+    }
+
+    public Workplace updateWorkplace(Workplace workplace, InstitutionForm institutionForm, byte[] image) {
+            workplace.setName(institutionForm.getName());
+            workplace.setAddress(institutionForm.getAddress());
+            workplace.setType("Workplace");
+            workplace.setImage(image);
+            return workplace;
+
     }
 }
