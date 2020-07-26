@@ -6,7 +6,9 @@ import com.example.CrudBook.model.Institution.Workplace;
 import com.example.CrudBook.model.User.Student;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.SchoolRepository;
+import com.example.CrudBook.repository.StudentRepository;
 import com.example.CrudBook.service.SchoolService;
+import com.example.CrudBook.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,7 +30,11 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
     @Autowired
+    StudentService studentService;
+    @Autowired
     SchoolRepository schoolRepository;
+    @Autowired
+    StudentRepository studentRepository;
 
     @GetMapping("/saveSchool")
     public String saveSchool(HttpServletRequest request, Model model) {
@@ -45,8 +52,14 @@ public class SchoolController {
     public String deleteSchool(@PathVariable("id") long id, Model model) {
 
         School school = schoolRepository.findById(id);
-        schoolRepository.delete(school);
-
+        List<Student> studentList = studentRepository.findAllBySchool(school);
+        if (!studentList.isEmpty()) {
+            for (Student student : studentList) {
+                student.setSchool(null);
+                studentService.saveStudent(student);
+            }
+            schoolRepository.delete(school);
+        }
         return "redirect:/institutions";
     }
 
@@ -66,7 +79,7 @@ public class SchoolController {
             return "redirect:/school/editschool/" + id;
         }
         School school = schoolRepository.findById(id);
-        schoolRepository.save(schoolService.updateSchool(school,institutionForm,image));
+        schoolRepository.save(schoolService.updateSchool(school, institutionForm, image));
 
 
         return "redirect:/institutions";

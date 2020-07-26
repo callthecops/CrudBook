@@ -3,8 +3,11 @@ package com.example.CrudBook.controller;
 import com.example.CrudBook.model.Institution.InstitutionForm;
 import com.example.CrudBook.model.Institution.School;
 import com.example.CrudBook.model.Institution.Workplace;
+import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
+import com.example.CrudBook.repository.EmployeeRepository;
 import com.example.CrudBook.repository.WorkplaceRepository;
+import com.example.CrudBook.service.EmployeeService;
 import com.example.CrudBook.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,7 +31,11 @@ public class WorkPlaceController {
     @Autowired
     WorkplaceService workplaceService;
     @Autowired
+    EmployeeService employeeService;
+    @Autowired
     WorkplaceRepository workplaceRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @GetMapping("/saveWorkplace")
     public String saveWorkplace(HttpServletRequest request, Model model) {
@@ -46,7 +54,15 @@ public class WorkPlaceController {
     public String deleteWorkplace(@PathVariable("id") long id, Model model) {
 
         Workplace workplace = workplaceRepository.findById(id);
-        workplaceRepository.delete(workplace);
+
+        List<Employee> employeeList = employeeRepository.findAllByWorkplace(workplace);
+        if (!employeeList.isEmpty()) {
+            for (Employee employee : employeeList) {
+                employee.setWorkplace(null);
+                employeeService.saveEmployee(employee);
+            }
+            workplaceRepository.delete(workplace);
+        }
 
         return "redirect:/institutions";
     }
@@ -67,7 +83,7 @@ public class WorkPlaceController {
             return "redirect:/workplace/editworkplace/" + id;
         }
         Workplace workplace = workplaceRepository.findById(id);
-        workplaceRepository.save(workplaceService.updateWorkplace(workplace,institutionForm,image));
+        workplaceRepository.save(workplaceService.updateWorkplace(workplace, institutionForm, image));
 
 
         return "redirect:/institutions";

@@ -1,9 +1,12 @@
 package com.example.CrudBook.controller;
 
+import com.example.CrudBook.model.Institution.School;
+import com.example.CrudBook.model.Institution.Workplace;
 import com.example.CrudBook.model.User.Employee;
 import com.example.CrudBook.model.User.Student;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.EmployeeRepository;
+import com.example.CrudBook.repository.WorkplaceRepository;
 import com.example.CrudBook.service.EmployeeService;
 import com.example.CrudBook.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ import java.util.Map;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    @Autowired
+    WorkplaceRepository workplaceRepository;
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
@@ -71,4 +76,12 @@ public class EmployeeController {
         return "redirect:/users";
     }
 
+    @GetMapping("/addworkplace/{workplaceid}/{employeeid}")
+    public String addSchoolToStudent(@PathVariable("workplaceid") long id, @PathVariable("employeeid") long id2, Model model) {
+        Workplace workplace = workplaceRepository.findById(id);
+        Employee employee = employeeRepository.findById(id2);
+        employee.setWorkplace(workplace);
+        employeeRepository.save(employee);
+        return "redirect:/users";
+    }
 }

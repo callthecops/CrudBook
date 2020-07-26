@@ -9,9 +9,11 @@ import com.example.CrudBook.model.User.Student;
 import com.example.CrudBook.model.User.User;
 import com.example.CrudBook.model.User.UserForm;
 import com.example.CrudBook.repository.SchoolRepository;
+import com.example.CrudBook.repository.StudentRepository;
 import com.example.CrudBook.repository.WorkplaceRepository;
 import com.example.CrudBook.service.InstitutionService;
 import com.example.CrudBook.service.SchoolService;
+import com.example.CrudBook.service.StudentService;
 import com.example.CrudBook.service.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,11 +41,15 @@ public class InstitutionController {
     WorkplaceService workplaceService;
     @Autowired
     SchoolService schoolService;
+    @Autowired
+    StudentService studentService;
 
     @Autowired
     SchoolRepository schoolRepository;
     @Autowired
     WorkplaceRepository workplaceRepository;
+    @Autowired
+    StudentRepository studentRepository;
 
     @GetMapping
     public String getInstitution(Model model) {

@@ -232,11 +232,59 @@ grid-gap:1px;
 
 
 
+#parentdropdown2{overflow-y:scroll;
+ display:flex;
+  width:100%;
+  justify-content:center;
+}
 
+#dropdown-container2{
+    float: left
+    font-family: Palatino Linotype;
+    position:absolute;
+}
+#dropdown2{
+    padding:5px;
+    cursor:pointer;
+    font-size: 15px;
+    border: 1px solid rgb(169, 169, 169);
+    -moz-appearance: none;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #2961c1 inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px purple inset;
+    width:300px;
+    margin:0px 0px 0px 15px;
+}
 
+#dropdown-list2{
+    display:none;
+    width: 100%;
+    padding:0px;
+    margin:0px 0px 0px 7px;
+    border: 1px solid rgb(169,169,169);
+}
 
+#dropdown-container2:hover ul#dropdown-list2{
+    display:block;
+    background-color:white;
+}
+#dropdown-container2 ul{
+    padding:0px;
+    list-style: none;
+}
+#dropdown-container2 ul li{
+    width:100%;
 
+}
+#dropdown-container2 ul li:hover{
+    background-color: lightblue;
+    cursor:pointer;
 
+}
+#dropdown-container2 ul li a{
+    padding-left: 10px;
+    text-decoration:none;
+    color: black;
+}
     </style>
 </head>
 <body>
@@ -280,13 +328,13 @@ grid-gap:1px;
                 <div id="studentCardElement" th:each="student: ${studentlist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" style="width:100%;max-width:300px;"
+                        <img class="round" style="min-width:300px;max-width:300px;max-height:300px;min-height:300px;"
                              th:src="@{'data:image/jpeg;base64,'+${student.base64}}" alt="user"/>
                         <h3 th:text="${student.firstName + ' ' + student.lastName}"></h3>
                         <h6 th:text="${student.specialisation + ',' + student.age}">New York</h6>
                         <!-- adding schools here -->
                         <div th:if="${#lists.isEmpty(schoollist)}">
-                            <h3>There are no schools in the database please add one !</h3>
+                            <h4>There are no schools in the database please add one !</h4>
                         </div>
                         <div th:unless="${#lists.isEmpty(schoollist)}">
                             <div class="col-lg-3" th:object="${school}">
@@ -304,9 +352,10 @@ grid-gap:1px;
                                     </div>
                                 </div>
                                 <div th:if="${student.school != null}">
-                                    <div th:text="${student.school.name}">
+                                    <div th:text="${'Studies at:'+student.school.name}">
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <br>
                         <br>
@@ -341,7 +390,7 @@ grid-gap:1px;
 </div>
 <!-- STUDENT CONTAINER ENDS HERE -->
 
-<br><br><br><br>
+<br><br>
 
 <br><br>
 <div id="employeeContainer">
@@ -356,15 +405,39 @@ grid-gap:1px;
                 <div id="employeeCardElement" th:each="employee: ${employeelist}">
                     <!-- CARD STARTS HERE -->
                     <div class="card-container">
-                        <img class="round" style="width:100%;max-width:300px;"
+                        <img class="round" style="min-width:300px;max-width:300px;max-height:300px;min-height:300px;"
                              th:src="@{'data:image/jpeg;base64,'+${employee.base64}}" alt="user"/>
                         <h3 th:text="${employee.firstName + ' ' + employee.lastName}"></h3>
                         <h6 th:text="${employee.specialisation + ',' + employee.age}">New York</h6>
-                        <!-- adding schools here -->
-                        <div th:if="${#employee.workplace==null}">
-                            <h1>HI</h1>
+                        <!-- adding workplace here -->
+
+                        <div th:if="${#lists.isEmpty(workplacelist)}">
+                            <h4>There are no workplaces in the database please add one !</h4>
                         </div>
-                        <!-- adding school end here -->
+                        <div th:unless="${#lists.isEmpty(workplacelist)}">
+                            <div class="col-lg-3" th:object="${workplace}">
+
+                                <!-- adding the dropdown here -->
+                                <div th:if="${employee.workplace == null}">
+                                    <div id="parentdropdown2">
+                                        <div id="dropdown-container2">
+                                            <div id="dropdown2">Select Workplace<span class="down-arrow-icon"></span></div>
+                                            <ul id="dropdown-list2" th:each="workplace : ${workplacelist}">
+                                                <li><a th:href="@{'/employee/addworkplace/'+${workplace.id}+'/'+${employee.id}}"
+                                                       th:text="${workplace.address}+' : '+${workplace.name}">one</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${employee.workplace != null}">
+                                    <div th:text="${'Works at:'+employee.workplace.name}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <!-- adding workplace end here -->
                         <div class="buttons">
                             <form method="GET" th:action="@{'/employee/editemployee/'+${employee.id}}">
                                 <input type="submit" value="Update" class="myButton">
@@ -392,7 +465,7 @@ grid-gap:1px;
 <!-- EMPLOYEE CONTAINERINNER ENDS HERE -->
 </div>
 <!-- EMPLOYEE CONTAINER ENDS HERE -->
-
+<br><br>
 <script>
     // Used to toggle the menu on small screens when clicking on the menu button
 function myFunction() {
@@ -403,13 +476,6 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-
-
-
-
-
-
-
 
 
 
