@@ -41,7 +41,7 @@ public class Logging {
     }
 
     //Advice for users
-
+    //This selects all the pointcuts that this advice is applied to .The ones in () represent the classes.
     @Before("postAction() && (employeeAction() || studentAction() || userAction())")
     public void beforePostUser(JoinPoint joinPoint) {
         //This gives us access to the request object so that we can access the paramteres of the form
