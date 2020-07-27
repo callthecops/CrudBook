@@ -1,9 +1,8 @@
 package com.example.CrudBook.AOPlogging;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -45,13 +44,23 @@ public class Logging {
 
     @Before("postAction() && (employeeAction() || studentAction() || userAction())")
     public void beforePostUser(JoinPoint joinPoint) {
+        //This gives us access to the request object so that we can access the paramteres of the form
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder
                 .getRequestAttributes())).getRequest();
-        String name = request.getParameter("firstName");
-        logger.info(name);
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String specialisation = request.getParameter("specialisation");
+        String institution = request.getParameter("institution");
+        String description = request.getParameter("description");
+        logger.info("USER ACTION:User " + "|First Name: " + firstName + "|Last name: " + lastName + "|Age: " + age
+                + "|Specialisation: " + specialisation + "|Institution: " + institution + "|Description: " + description);
     }
 
-
+    @After("postAction() && (employeeAction() || studentAction() || userAction())")
+    public void afterPostUser(JoinPoint joinPoint) {
+        logger.info("ACTION PERFORMED");
+    }
 
     /////////////////////////// Pointcuts for institutions
 
@@ -80,27 +89,14 @@ public class Logging {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder
                 .getRequestAttributes())).getRequest();
         String name = request.getParameter("name");
-        logger.info(name);
+        String address = request.getParameter("address");
+        String institution = request.getParameter("institution");
+        logger.info("USER ACTION:Institution " + "|Name: " + name + "|Address: " + address + "|Institution: " + institution);
     }
 
-
-
-
-//    @Around("postAction()")
-//    public void watchPerformance(ProceedingJoinPoint joinPoint) {
-//        try {
-//            //this happens before pointcut
-//            System.out.println("Before starting the car2");
-//            logger.info("Before Post");
-//            joinPoint.proceed();
-//            //this happens after pointcut
-//            System.out.println("After post");
-//            logger.warn("MODIFIED");
-//        } catch (Throwable e) {
-//            //if exception is thrown this happens
-//            System.out.println("Error: " + e);
-//        }
-//    }
-
+    @After("postAction() && (institutionAction() || schoolAction() || workplaceAction())")
+    public void afterPostInstitution(JoinPoint joinPoint) {
+        logger.info("ACTION PERFORMED");
+    }
 
 }
